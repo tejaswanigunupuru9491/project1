@@ -1,6 +1,7 @@
 // api/inngest.js
 
 import { serve } from "inngest/vercel"; // For Vercel deployment
-import { inngest, functions } from "../inngest/index.js"; // Adjust path if needed
+import { inngest, functions } from "../server/inngest/index.js";
+
 
 export default serve(inngest, functions);
