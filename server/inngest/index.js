@@ -7,6 +7,7 @@ export const inngest = new Inngest({
   signingKey: process.env.INNGEST_SIGNING_KEY, // 🔑 This line is critical!
 });
 
+
 // ✅ Function: User Creation
 const syncUserCreation = inngest.createFunction(
   { id: "sync-user-from-clerk" },
