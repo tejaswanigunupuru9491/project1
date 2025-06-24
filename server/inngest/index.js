@@ -7,14 +7,11 @@ export const inngest = new Inngest({
   signingKey: process.env.INNGEST_SIGNING_KEY, // 🔑 This line is critical!
 });
 
-
 // ✅ Function: User Creation
 const syncUserCreation = inngest.createFunction(
   { id: "sync-user-from-clerk" },
   { event: "clerk/User.created" },
-  
   async ({ event }) => {
-     await connectDB(); 
     const { id, first_name, last_name, email_addresses, image_url } = event.data;
     const userData = {
       _id: id,
@@ -32,7 +29,6 @@ const syncUserDeletion = inngest.createFunction(
   { id: "delete-user-from-clerk" },
   { event: "clerk/User.deleted" },
   async ({ event }) => {
-     await connectDB(); 
     const { id } = event.data;
     await User.findByIdAndDelete(id);
   }
@@ -43,7 +39,6 @@ const syncUserUpdation = inngest.createFunction(
   { id: "update-user-from-clerk" },
   { event: "clerk/User.updated" },
   async ({ event }) => {
-     await connectDB(); 
     const { id, first_name, last_name, email_addresses, image_url } = event.data;
     const userData = {
       _id: id,
